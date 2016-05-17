@@ -2,11 +2,7 @@
 
 #display env. variables
 echo ---------------------------------------------------------------------------
-echo "Configured outputs:"
 echo "CONSUL: "$CONSUL
-echo "InfluxDB:     $OUTPUT_INFLUXDB_ENABLED"
-echo "Cloudwatch:   $OUTPUT_CLOUDWATCH_ENABLED"
-echo "Kafka:        $OUTPUT_KAFKA_ENABLED"
 if [ -z "$CONSUL" ]; then
   exec /run.sh
 else
