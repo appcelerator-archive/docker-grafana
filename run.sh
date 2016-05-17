@@ -75,7 +75,7 @@ else
 fi
 
 echo
-exec "$GRAFANA_BIN" \
+"$GRAFANA_BIN" \
   --homepath=/usr/share/grafana             \
   cfg:default.paths.data="$GF_PATHS_DATA"   \
   cfg:default.paths.logs="$GF_PATHS_LOGS"   \

@@ -1,0 +1,19 @@
+{
+  "consul": "[consul]",
+  "services": [
+    {
+      "name": "grafana",
+      "port": 8500,
+      "health": "pidof grafana-server",
+      "poll": 10,
+      "ttl": 30
+    }
+  ],
+  "backends": [
+    {
+      "name": "influxdb",
+      "poll": 10,
+      "onChange": "/stop.sh"
+    }
+  ]
+}

@@ -60,3 +60,11 @@ docker run \
 mount dashboards in /etc/grafana/config-dashboard*.js and datasources in /etc/grafana/config-datasource*.js, they will be loaded at container start.
 
 Default ones are already loaded.
+
+
+Container pilot
+---------------
+
+To enable container pilot, specify the Consul URL:
+
+```docker run -e CONSUL=consul:8500 ...```

@@ -37,7 +37,7 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories &
     mv ./conf /usr/share/grafana/conf && \
     apk del build-deps && cd / && rm -rf /var/cache/apk/* $GOPATH
 
-RUN apk --no-cache add curl
+RUN apk --no-cache add curl bash
 
 VOLUME ["/var/lib/grafana", "/var/lib/grafana/plugins", "/var/log/grafana", "/etc/grafana"]
 
@@ -55,7 +55,21 @@ COPY ./grafana.ini /usr/share/grafana/conf/defaults.ini.tpl
 COPY ./config-*.js /etc/grafana/
 COPY ./run.sh /run.sh
 
-CMD ["/run.sh"]
+# Add ContainerPilot
+ENV CONTAINERPILOT=2.1.0
+RUN curl -Lo /tmp/cb.tar.gz https://github.com/joyent/containerpilot/releases/download/$CONTAINERPILOT/containerpilot-$CONTAINERPILOT.tar.gz \
+&& tar -xz -f /tmp/cb.tar.gz \
+&& mv ./containerpilot /bin/
+COPY containerpilot.json /etc/containerpilot.json
+COPY ./start.sh /start.sh
+COPY ./stop.sh /stop.sh
+RUN chmod +x /*.sh
+
+#ENV CONSUL=consul:8500
+ENV CONTAINERPILOT=file:///etc/containerpilot.json
+ENV DEPENDENCIES=influxdb
+
+CMD ["/start.sh"]
 
 LABEL axway_image=grafana
 # will be updated whenever there's a new commit
