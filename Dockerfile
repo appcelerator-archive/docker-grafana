@@ -46,12 +46,13 @@ COPY ./grafana.ini /usr/share/grafana/conf/defaults.ini.tpl
 COPY ./run.sh /run.sh
 
 ENV SERVICE_NAME=grafana
-ENV AMPPILOT_LAUNCH_CMD=/run.sh
+ENV AMPPILOT_LAUNCH_CMD=/bin/grafana-server
 ENV AMPPILOT_REGISTEREDPORT=3000
 ENV DEPENDENCIES="influxdb, amp-log-agent"
 ENV AMPPILOT_AMPLOGAGENT_ONLYATSTARTUP=true
 
-ENTRYPOINT ["/amp-pilot"]
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["/run.sh"]
 
 LABEL axway_image=grafana
 # will be updated whenever there's a new commit
