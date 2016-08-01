@@ -39,6 +39,7 @@ ENV INFLUXDB_PASS changeme
 ENV GRAFANA_USER admin
 ENV GRAFANA_PASS changeme
 #ENV GRAFANA_BASE_URL
+ENV FORCE_HOSTNAME
 
 COPY ./grafana.ini /usr/share/grafana/conf/defaults.ini.tpl
 COPY ./run.sh /run.sh
