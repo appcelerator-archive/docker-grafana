@@ -1,0 +1,80 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "bluebell_dev",
+    "namespace": "default",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/default/deployments/bluebell_dev",
+    "uid": "2c5696c8-c8d4-11e7-ae32-46ab62d954a1",
+    "resourceVersion": "1034",
+    "generation": 1,
+    "creationTimestamp": "null",
+    "labels": {
+      "app": "bluebell_dev"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "1"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "bluebell_dev"
+      }
+    },
+    "template": {
+      "metadata": {
+        "name": "bluebell_dev",
+        "creationTimestamp": null,
+        "labels": {
+          "app": "blue-bell-iot-dashboard"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "bluebell_dev",
+            "image": "appcelerator/grafana",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always",
+            "securityContext": {
+              "privileged": false
+            }
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
+    }
+  },
+  "status": {
+    "observedGeneration": 1,
+    "replicas": 1,
+    "updatedReplicas": 1,
+    "readyReplicas": 1,
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "type": "Available",
+        "status": "True",
+        "lastUpdateTime": "2017-11-14T00:38:46Z",
+        "lastTransitionTime": "2017-11-14T00:38:46Z",
+        "reason": "MinimumReplicasAvailable",
+        "message": "Deployment has minimum availability."
+      }
+    ]
+  }
+}
